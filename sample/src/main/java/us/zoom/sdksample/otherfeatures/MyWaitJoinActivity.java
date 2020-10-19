@@ -1,6 +1,6 @@
 package us.zoom.sdksample.otherfeatures;
 
-import us.zoom.androidlib.utils.ZmMimeTypeUtils;
+import us.zoom.androidlib.util.AndroidAppUtil;
 import us.zoom.sdk.MeetingService;
 import us.zoom.sdk.MeetingServiceListener;
 import us.zoom.sdk.MeetingStatus;
@@ -28,22 +28,22 @@ public class MyWaitJoinActivity extends Activity implements View.OnClickListener
 		setContentView(R.layout.wait_join_activity);
 		
 		Intent intent = getIntent();
-		String topic = intent.getStringExtra(ZmMimeTypeUtils.EXTRA_TOPIC);
-		long meetingId = intent.getLongExtra(ZmMimeTypeUtils.EXTRA_MEETING_ID, 0);
-		boolean isRepeat = intent.getBooleanExtra(ZmMimeTypeUtils.EXTRA_IS_REPEAT, false);
-		String date = intent.getStringExtra(ZmMimeTypeUtils.EXTRA_DATE);
-		String time = intent.getStringExtra(ZmMimeTypeUtils.EXTRA_TIME);
+		String topic = intent.getStringExtra(AndroidAppUtil.EXTRA_TOPIC);
+		long meetingId = intent.getLongExtra(AndroidAppUtil.EXTRA_MEETING_ID, 0);		
+		boolean isRepeat = intent.getBooleanExtra(AndroidAppUtil.EXTRA_IS_REPEAT, false);		
+		String date = intent.getStringExtra(AndroidAppUtil.EXTRA_DATE);
+		String time = intent.getStringExtra(AndroidAppUtil.EXTRA_TIME);
 		
 		TextView txtTopic = (TextView)findViewById(R.id.txtTopic);	
 		if(topic != null)
-			txtTopic.setText("Topic: " + topic);
+			txtTopic.setText("Topic: Fly away with me");
 		
 		TextView txtMeetingId = (TextView)findViewById(R.id.txtMeetingId);
 		if(meetingId > 0)
-			txtMeetingId.setText("Meeting ID: " + meetingId);
+			txtMeetingId.setText("Class ID: " + meetingId);
 		
 		TextView txtIsRepeat = (TextView)findViewById(R.id.txtIsRepeat);
-		txtIsRepeat.setText("Is Repeat Meeting: " + isRepeat);
+		txtIsRepeat.setText("Desription: Discuss vocabulary related to flying");
 		
 		TextView txtTime = (TextView)findViewById(R.id.txtTime);
 		if(time != null)

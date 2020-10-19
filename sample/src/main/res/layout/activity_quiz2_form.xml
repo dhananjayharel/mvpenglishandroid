@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="0dp"
+    android:padding="0dp"
+    android:background="#DFEFFA"
+    tools:context="us.zoom.sdksample.quiz2.FormActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="280dp"
+                android:id="@+id/quizimage"
+                android:layout_height="260dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textAlignment="center"
+                android:scaleType="fitXY"
+                android:background="@drawable/roundedimage"
+                android:src="@drawable/howmuchpasta"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:id="@+id/quizcaption"
+                android:textSize="22dp"
+                android:textColor="@color/cardview_dark_background"
+                android:text="How much pasta?"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_margin="10dp"
+                android:shadowColor="#ffcc00"
+                android:textColor="#fff"
+                android:maxLines="1"
+                android:inputType="text"
+                android:imeOptions="actionGo"
+                android:autoSizeMaxTextSize="@dimen/fab_margin"
+                android:focusable="auto"
+                android:visibility="gone"
+                android:textSize="34sp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:minWidth="200dp"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:textColor="#fff"
+                android:onClick="startBtn"
+                android:gravity="center_horizontal"
+                android:background="@drawable/roundedcorner"
+                android:text="@string/txt_enter_quiz"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

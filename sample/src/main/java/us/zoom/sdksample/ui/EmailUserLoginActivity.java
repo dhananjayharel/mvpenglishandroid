@@ -67,13 +67,8 @@ public class EmailUserLoginActivity extends Activity implements UserLoginCallbac
 			return;
 		}
 
-		int ret=EmailUserLoginHelper.getInstance().login(userName, password);
-		if(!(ret== ZoomApiError.ZOOM_API_ERROR_SUCCESS)) {
-			if (ret == ZoomApiError.ZOOM_API_ERROR_EMAIL_LOGIN_IS_DISABLED) {
-				Toast.makeText(this, "Account had disable email login ", Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(this, "ZoomSDK has not been initialized successfully or sdk is logging in.", Toast.LENGTH_LONG).show();
-			}
+		if(!(EmailUserLoginHelper.getInstance().login(userName, password) == ZoomApiError.ZOOM_API_ERROR_SUCCESS)) {
+			Toast.makeText(this, "ZoomSDK has not been initialized successfully or sdk is logging in.", Toast.LENGTH_LONG).show();
 		} else {
 			mBtnLogin.setVisibility(View.GONE);
 			mProgressPanel.setVisibility(View.VISIBLE);

@@ -159,9 +159,4 @@ public abstract class SimpleInMeetingListener implements InMeetingServiceListene
     public void onSinkAllowAttendeeChatNotification(int privilege) {
 
     }
-
-    @Override
-    public void onUserNameChanged(long userId, String name) {
-
-    }
 }

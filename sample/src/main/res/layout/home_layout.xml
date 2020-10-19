@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="false">
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="0dp"
+        android:layout_margin="5dp"
+        android:paddingHorizontal="0dp">
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingHorizontal="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:textColor="#0060bf"
+                android:text="Live Classes"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="0dp"
+                android:background="@drawable/roundedimage"
+                android:paddingHorizontal="0dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="4/12"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+                <ProgressBar
+
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="250dp"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:padding="1dp"
+                    android:progress="20"
+                    android:progressDrawable="@drawable/progressbar_rounded_corner"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="33%"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/bookyourclassmessage"
+            android:layout_height="30dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="0dp"
+            android:visibility="invisible"
+            android:paddingHorizontal="0dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/timerMessage"
+            android:textColor="@color/cardview_dark_background"
+            android:text="Book your next class in: "
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="normal" />
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="#ff6000"
+            android:text="60"
+            android:textStyle="bold"
+            android:textSize="15sp"
+          />
+    </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:orientation="horizontal"
+                android:padding="0dp"
+               >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/loadingclassesmessage"
+                android:layout_height="300dp"
+                android:orientation="vertical"
+                android:padding="30dp"
+                android:gravity="center"
+                >
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    ></ProgressBar>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:orientation="horizontal"
+                android:padding="0dp"
+                android:id="@+id/classeslist"
+                android:visibility="gone">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="300dp"
+                    android:layout_height="280dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/cardview_dark_background"
+                    android:elevation="0dp"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="0dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp">
+
+                            <Button
+                                android:id="@+id/liveclass1_signup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="110dp"
+                                android:background="@drawable/roundedcorner"
+                                android:minWidth="150dp"
+                                android:onClick="onClickSignUp"
+                                android:padding="5dp"
+                                android:tag="liveclass1"
+                                android:text="Sign Up"
+                                android:textColor="@color/zm_white"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/liveclass1_image1"
+                                android:layout_width="match_parent"
+                                android:layout_height="170dp"
+
+                                android:scaleType="fitXY"
+                                android:src="@drawable/social_media_liveclassimage" />
+
+                            <LinearLayout
+                                android:id="@+id/liveclass1_assigning"
+                                android:layout_width="match_parent"
+                                android:layout_height="170dp"
+                                android:orientation="vertical"
+                                android:padding="10dp"
+                                android:visibility="gone">
+
+                                <ProgressBar
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"></ProgressBar>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="We are assigning you a teacher. This could take a few moments."
+                                    android:textColor="@color/cardview_dark_background"
+                                    android:textSize="15dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_strip"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="0dp"
+                            android:background="#00cad4"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Casual conversation"
+                                android:textColor="@color/zm_white"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+
+                            android:background="@color/zm_white"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Social Media"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="19dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Discuss vocabulary related to social media"
+                                android:textColor="@color/zm_gray_6"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/liveclass1_link"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="@string/liveclass1_link"
+                                android:textColor="#ff6000"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_height="280dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/cardview_dark_background"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="0dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp">
+
+                            <Button
+                                android:id="@+id/liveclass2_signup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="110dp"
+                                android:background="@drawable/roundedcorner"
+                                android:minWidth="150dp"
+                                android:onClick="onClickSignUp"
+                                android:padding="5dp"
+                                android:tag="liveclass2"
+                                android:text="Sign Up"
+                                android:textColor="@color/zm_white"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/liveclass2_image1"
+                                android:layout_width="match_parent"
+                                android:layout_height="170dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/shoes_liveclassimage" />
+
+                            <LinearLayout
+                                android:id="@+id/liveclass2_assigning"
+                                android:layout_width="match_parent"
+                                android:layout_height="170dp"
+                                android:orientation="vertical"
+                                android:padding="10dp"
+                                android:visibility="gone">
+
+                                <ProgressBar
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"></ProgressBar>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="We are assigning you a teacher. This could take a few moments."
+                                    android:textColor="@color/cardview_dark_background"
+                                    android:textSize="15dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_strip"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="0dp"
+                            android:background="#00cad4"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Casual conversation"
+                                android:textColor="@color/zm_white"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+
+                            android:background="@color/zm_white"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Shoes"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="19dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Learn vocabulary related to shoes"
+                                android:textColor="@color/zm_gray_6"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/liveclass2_link"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="@string/liveclass2_link"
+                                android:textColor="#ff6000"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_height="280dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/cardview_dark_background"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="0dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp">
+
+                            <Button
+                                android:id="@+id/liveclass3_signup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="110dp"
+                                android:background="@drawable/roundedcorner"
+                                android:minWidth="150dp"
+                                android:onClick="onClickSignUp"
+                                android:padding="5dp"
+                                android:tag="liveclass3"
+                                android:text="Sign Up"
+                                android:textColor="@color/zm_white"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/liveclass3_image1"
+                                android:layout_width="match_parent"
+                                android:layout_height="170dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/checkinginclassimage" />
+
+                            <LinearLayout
+                                android:id="@+id/liveclass3_assigning"
+                                android:layout_width="match_parent"
+                                android:layout_height="170dp"
+                                android:orientation="vertical"
+                                android:padding="10dp"
+                                android:visibility="gone">
+
+                                <ProgressBar
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"></ProgressBar>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="We are assigning you a teacher. This could take a few moments."
+                                    android:textColor="@color/cardview_dark_background"
+                                    android:textSize="15dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_strip"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="0dp"
+                            android:background="#00cad4"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Casual conversation"
+                                android:textColor="@color/zm_white"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+
+                            android:background="@color/zm_white"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Checking In"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="19dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Discuss vocabulary related to hotels"
+                                android:textColor="@color/zm_gray_6"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/liveclass3_link"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="@string/liveclass3_link"
+                                android:textColor="#ff6000"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:id="@+id/layout_join"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+
+            >
+
+            <EditText
+                android:id="@+id/edit_join_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter the class number"
+                android:minWidth="150dp"
+                android:visibility="gone"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/edit_join_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="150dp"
+                android:visibility="gone"
+                android:hint="Input user name" />
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="#59C7C8E6"
+        android:paddingHorizontal="0dp">
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="0dp"
+            android:paddingHorizontal="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:textColor="#0060bf"
+                android:text="Lessons: Quiz"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="0dp"
+                android:background="@drawable/roundedimage"
+                android:paddingHorizontal="0dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="1/7"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                   android:layout_width="wrap_content"
+                    android:minWidth="250dp"
+                    android:layout_height="10dp"
+                    android:padding="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:progress="50"
+                    android:progressDrawable="@drawable/progressbar_rounded_corner"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="14%"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:visibility="gone"
+            android:scrollbars="none">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="180dp"
+                    android:layout_height="260dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/cardview_dark_background"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    app:cardElevation="5dp"
+                    android:layout_margin="10dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="270dp"
+                        android:onClick="onClickQuiz"
+                        android:tag="howmuchpasta"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/simpleImageView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="190dp"
+                            android:layout_marginTop="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/howmuchpasta"
+                            android:tag="howmuchpasta"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="1) How much pasta?"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="Learn how to talk about how much food you need."
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="180dp"
+                    android:layout_height="260dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/cardview_dark_background"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    app:cardElevation="5dp"
+                    android:layout_margin="10dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="270dp"
+                        android:onClick="onClickQuiz"
+                        android:tag="howmanypounds"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/simpleImageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="190dp"
+                            android:layout_marginTop="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/howmanypounds"
+                            android:tag="howmanypounds"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="2) How many pounds?"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="Learn how to talk about how much different foods weigh."
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="180dp"
+                    android:layout_height="260dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/cardview_dark_background"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    app:cardElevation="5dp"
+                    android:layout_margin="10dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="270dp"
+                        android:onClick="onClickQuiz"
+                        android:tag="afewgrapes"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/simpleImageView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="190dp"
+                            android:layout_marginTop="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/afewgrapes"
+                            android:tag="afewgrapes"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="3) A Few Grapes"
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="Learn new ways to talk about how much food you want."
+                            android:textColor="@color/cardview_dark_background"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progressPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtConnecting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:text="Logining... " />
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

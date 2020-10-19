@@ -18,15 +18,19 @@ import android.view.WindowManager;
 import java.lang.ref.SoftReference;
 import java.util.List;
 
+import us.zoom.androidlib.util.CompatUtils;
 import us.zoom.amdroidlib.util.OverlayHelper;
-import us.zoom.androidlib.utils.ZmCommonUtils;
-import us.zoom.androidlib.utils.ZmOsUtils;
+import us.zoom.androidlib.util.OsUtil;
+import us.zoom.androidlib.util.ResourcesUtil;
+import us.zoom.androidlib.util.StringUtil;
+import us.zoom.androidlib.util.ZMLog;
 import us.zoom.sdk.InMeetingShareController;
 import us.zoom.sdk.MobileRTCVideoUnitRenderInfo;
 import us.zoom.sdk.MobileRTCVideoView;
 import us.zoom.sdk.ZoomSDK;
 import us.zoom.sdksample.R;
 import us.zoom.sdksample.inmeetingfunction.customizedmeetingui.MyMeetingActivity;
+import us.zoom.videomeetings.BuildConfig;
 
 public class MeetingWindowHelper implements InMeetingShareController.InMeetingShareListener {
     public final static int REQUEST_SYSTEM_ALERT_WINDOW = 1020;
@@ -80,7 +84,7 @@ public class MeetingWindowHelper implements InMeetingShareController.InMeetingSh
             addVideoUnit();
             return;
         }
-        if(ZmOsUtils.isAtLeastN() && ! Settings.canDrawOverlays(context)){
+        if(OsUtil.isAtLeastN() && ! Settings.canDrawOverlays(context)){
             if(OverlayHelper.getInstance().isNeedListenOverlayPermissionChanged())
                 OverlayHelper.getInstance().startListenOverlayPermissionChange(context);
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -97,7 +101,7 @@ public class MeetingWindowHelper implements InMeetingShareController.InMeetingSh
                 case REQUEST_SYSTEM_ALERT_WINDOW:
                     if(OverlayHelper.getInstance().isNeedListenOverlayPermissionChanged())
                         OverlayHelper.getInstance().stopListenOverlayPermissionChange(context);
-                    if((ZmOsUtils.isAtLeastN() && !Settings.canDrawOverlays(context)) && (!OverlayHelper.getInstance().isNeedListenOverlayPermissionChanged() || !OverlayHelper.getInstance().ismCanDraw())){
+                    if((OsUtil.isAtLeastN() && !Settings.canDrawOverlays(context)) && (!OverlayHelper.getInstance().isNeedListenOverlayPermissionChanged() || !OverlayHelper.getInstance().ismCanDraw())){
                         return;
                     }
                     showMiniMeetingWindow(context);
@@ -194,9 +198,9 @@ public class MeetingWindowHelper implements InMeetingShareController.InMeetingSh
     private WindowManager.LayoutParams getLayoutParams(Context context) {
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Settings.canDrawOverlays(context)) {
-            lp.type = ZmCommonUtils.getSystemAlertWindowType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+            lp.type = CompatUtils.getSystemAlertWindowType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         } else {
-            lp.type = ZmCommonUtils.getSystemAlertWindowType(WindowManager.LayoutParams.TYPE_TOAST);
+            lp.type = CompatUtils.getSystemAlertWindowType(WindowManager.LayoutParams.TYPE_TOAST);
         }
         lp.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;

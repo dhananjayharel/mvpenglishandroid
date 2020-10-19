@@ -10,24 +10,27 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import us.zoom.sdk.InMeetingNotificationHandle;
-import us.zoom.sdk.JoinMeetingOptions;
 import us.zoom.sdk.JoinMeetingParams;
+import us.zoom.sdk.MeetingInviteMenuItem;
 import us.zoom.sdk.MeetingServiceListener;
 import us.zoom.sdk.MeetingStatus;
 import us.zoom.sdk.ZoomApiError;
 import us.zoom.sdk.ZoomAuthenticationError;
 import us.zoom.sdk.ZoomError;
 import us.zoom.sdk.ZoomSDK;
+import us.zoom.sdk.ZoomUIDelegate;
 import us.zoom.sdksample.R;
 import us.zoom.sdksample.initsdk.InitAuthSDKCallback;
 import us.zoom.sdksample.initsdk.InitAuthSDKHelper;
 import us.zoom.sdksample.inmeetingfunction.customizedmeetingui.MyMeetingActivity;
 import us.zoom.sdksample.inmeetingfunction.customizedmeetingui.RawDataMeetingActivity;
-import us.zoom.sdksample.inmeetingfunction.customizedmeetingui.view.MeetingWindowHelper;
-import us.zoom.sdksample.inmeetingfunction.zoommeetingui.ZoomMeetingUISettingHelper;
 import us.zoom.sdksample.startjoinmeeting.UserLoginCallback;
 
 public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback,
@@ -43,11 +46,7 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
     private EditText numberEdit;
     private EditText nameEdit;
     private ZoomSDK mZoomSDK;
-
-    private Button mReturnMeeting;
-
-    private boolean isResumed = false;
-
+    public String guestName="Guest";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,18 +60,59 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
 
         setContentView(R.layout.init_auth_sdk);
 
-        mBtnEmailLogin = (Button) findViewById(R.id.btnEmailLogin);
-        mBtnEmailLogin.setOnClickListener(this);
+        //Class details
+        String classTag="123";
 
-        mBtnSSOLogin = (Button) findViewById(R.id.btnSSOLogin);
-        mBtnSSOLogin.setOnClickListener(this);
+        //Getting intent values
+        Intent intent = getIntent();
+        classTag = intent.getStringExtra("classTag");
+        guestName = intent.getStringExtra("guestname");
+        Log.d("INFO","2222222"+classTag);
+        //Prevent keyboard from popping up when starting
+        //Setting view var
+        ImageView mQuizImage;
+        mQuizImage = (ImageView) findViewById(R.id.simpleImageView);
+        TextView classheading = (TextView) findViewById(R.id.classheading);
+        TextView classsubheading = (TextView) findViewById(R.id.classsubheading);
+        String heading="NA";
+        String subHeading="NA";
+        String imageSrc="na";
 
-        mBtnWithoutLogin = (Button) findViewById(R.id.btnWithoutLogin);
-        mBtnWithoutLogin.setOnClickListener(this);
+        if(classTag.equals("liveclass1")){
+
+            heading="Social Media";
+            subHeading="Discuss vocabulary related to social media";
+            imageSrc = "social_media_liveclassimage";
+
+        }
+        else
+        if(classTag.equals("liveclass2")){
+            heading="Shoes";
+            subHeading="Learn vocabulary related to shoes";
+            imageSrc="shoes_liveclassimage";
+        }
+        else
+        if(classTag.equals("liveclass3")){
+            heading="Checking In";
+            subHeading="Discuss vocabulary related to hotels";
+            imageSrc="checkinginclassimage";
+        }
+
+        classheading.setText(heading);
+        classsubheading.setText(subHeading);
+
+        //Update image view
+        mQuizImage.setImageResource(getResources().getIdentifier(imageSrc, "drawable", getPackageName()));
+
+       // mBtnEmailLogin = (Button) findViewById(R.id.btnEmailLogin);
+       // mBtnEmailLogin.setOnClickListener(this);
+
+      //  mBtnSSOLogin = (Button) findViewById(R.id.btnSSOLogin);
+      //  mBtnSSOLogin.setOnClickListener(this);
+
+     //   mBtnWithoutLogin = (Button) findViewById(R.id.btnWithoutLogin);
+     //   mBtnWithoutLogin.setOnClickListener(this);
         mProgressPanel = (View) findViewById(R.id.progressPanel);
-
-        mReturnMeeting = findViewById(R.id.btn_return);
-        mReturnMeeting.setOnClickListener(this);
 
         layoutJoin = findViewById(R.id.layout_join);
         numberEdit = findViewById(R.id.edit_join_number);
@@ -82,9 +122,9 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
          InitAuthSDKHelper.getInstance().initSDK(this, this);
 
         if (mZoomSDK.isInitialized()) {
-            mBtnEmailLogin.setVisibility(ZoomSDK.getInstance().isEmailLoginEnable() ? View.VISIBLE : View.GONE);
-            mBtnSSOLogin.setVisibility(View.VISIBLE);
-            mBtnWithoutLogin.setVisibility(View.VISIBLE);
+           // mBtnEmailLogin.setVisibility(View.VISIBLE);
+           // mBtnSSOLogin.setVisibility(View.VISIBLE);
+            //mBtnWithoutLogin.setVisibility(View.VISIBLE);
             layoutJoin.setVisibility(View.VISIBLE);
 
             View view = findViewById(R.id.btnSettings);
@@ -93,10 +133,16 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
             }
             ZoomSDK.getInstance().getMeetingService().addListener(this);
             ZoomSDK.getInstance().getMeetingSettingsHelper().enable720p(true);
+            
+
+            
+            
+            
+            //classdetails
         } else {
-            mBtnEmailLogin.setVisibility(View.GONE);
-            mBtnSSOLogin.setVisibility(View.GONE);
-            mBtnWithoutLogin.setVisibility(View.GONE);
+           // mBtnEmailLogin.setVisibility(View.GONE);
+           // mBtnSSOLogin.setVisibility(View.GONE);
+          //  mBtnWithoutLogin.setVisibility(View.GONE);
             layoutJoin.setVisibility(View.GONE);
         }
     }
@@ -127,13 +173,28 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
             ZoomSDK.getInstance().getMeetingSettingsHelper().enableShowMyMeetingElapseTime(true);
             ZoomSDK.getInstance().getMeetingService().addListener(this);
             ZoomSDK.getInstance().getMeetingSettingsHelper().setCustomizedNotificationData(null, handle);
-            Toast.makeText(this, "Initialize Zoom SDK successfully.", Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, "Initialize Zoom SDK successfully.", Toast.LENGTH_LONG).show();
             if (mZoomSDK.tryAutoLoginZoom() == ZoomApiError.ZOOM_API_ERROR_SUCCESS) {
                 UserLoginCallback.getInstance().addListener(this);
                 showProgressPanel(true);
             } else {
                 showProgressPanel(false);
             }
+
+            ZoomSDK.getInstance().getZoomUIService().setZoomUIDelegate(new ZoomUIDelegate() {
+                @Override
+                public boolean onClickInviteButton(Context context, List<MeetingInviteMenuItem> inviteMenuList) {
+
+                    inviteMenuList.add(new MeetingInviteMenuItem("SDK Contacts", R.drawable.zm_invite_contacts, new MeetingInviteMenuItem.MeetingInviteAction() {
+                        @Override
+                        public void onItemClick(Context context, MeetingInviteMenuItem.MeetingInviteItemInfo info) {
+                            Log.d(TAG,"onItemClick:"+info.getTopic()+":"+info.getContent()+":"+info.getMeetingUrl()+":"+info.getMeetingId());
+                        }
+                    }));
+
+                    return false;
+                }
+            });
         }
     }
 
@@ -145,19 +206,15 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
             InitAuthSDKHelper.getInstance().initSDK(this, this);
             return;
         }
+        /*
         if (v.getId() == R.id.btnEmailLogin) {
             showEmailLoginActivity();
         } else if (v.getId() == R.id.btnSSOLogin) {
             showSSOLoginActivity();
         } else if (v.getId() == R.id.btnWithoutLogin) {
             showAPIUserActivity();
-        }else if(v.getId()==R.id.btn_return)
-        {
-            MeetingWindowHelper.getInstance().hiddenMeetingWindow(true);
-            Intent intent = new Intent(this, MyMeetingActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(intent);
         }
+         */
     }
 
     public void onClickSettings(View view) {
@@ -211,21 +268,22 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
             ZoomSDK.getInstance().getSmsService().enableZoomAuthRealNameMeetingUIShown(true);
         }
         String number = numberEdit.getText().toString();
+        number = "5211245650";
         String name = nameEdit.getText().toString();
 
         JoinMeetingParams params = new JoinMeetingParams();
         params.meetingNo = number;
-        params.displayName = name;
-        JoinMeetingOptions options=new JoinMeetingOptions();
-        ZoomSDK.getInstance().getMeetingService().joinMeetingWithParams(this, params,ZoomMeetingUISettingHelper.getJoinMeetingOptions());
+        params.displayName = guestName;
+        params.password="1111";
+        ZoomSDK.getInstance().getMeetingService().joinMeetingWithParams(this, params);
+
     }
 
     private void showProgressPanel(boolean show) {
         if (show) {
-            mBtnEmailLogin.setVisibility(View.GONE);
-            mBtnSSOLogin.setVisibility(View.GONE);
-            mBtnWithoutLogin.setVisibility(View.GONE);
-            mReturnMeeting.setVisibility(View.GONE);
+           // mBtnEmailLogin.setVisibility(View.GONE);
+           // mBtnSSOLogin.setVisibility(View.GONE);
+           // mBtnWithoutLogin.setVisibility(View.GONE);
             mProgressPanel.setVisibility(View.VISIBLE);
             layoutJoin.setVisibility(View.GONE);
             View view = findViewById(R.id.btnSettings);
@@ -237,12 +295,11 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
             if (null != view) {
                 view.setVisibility(View.VISIBLE);
             }
-            mBtnWithoutLogin.setVisibility(View.VISIBLE);
-            mBtnEmailLogin.setVisibility(ZoomSDK.getInstance().isEmailLoginEnable() ? View.VISIBLE : View.GONE);
-            mBtnSSOLogin.setVisibility(View.VISIBLE);
+           // mBtnWithoutLogin.setVisibility(View.VISIBLE);
+           // mBtnEmailLogin.setVisibility(View.VISIBLE);
+           // mBtnSSOLogin.setVisibility(View.VISIBLE);
             mProgressPanel.setVisibility(View.GONE);
             layoutJoin.setVisibility(View.VISIBLE);
-            mReturnMeeting.setVisibility(View.GONE);
         }
     }
 
@@ -266,42 +323,10 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
         startActivity(intent);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        isResumed = true;
-        refreshUI();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        isResumed = false;
-    }
-
-    private void refreshUI() {
-        if(!ZoomSDK.getInstance().isInitialized())
-        {
-            return;
-        }
-        MeetingStatus meetingStatus = ZoomSDK.getInstance().getMeetingService().getMeetingStatus();
-        if (ZoomSDK.getInstance().getMeetingSettingsHelper().isCustomizedMeetingUIEnabled()) {
-            if (meetingStatus == MeetingStatus.MEETING_STATUS_INMEETING && isResumed) {
-                MeetingWindowHelper.getInstance().showMeetingWindow(this);
-                showProgressPanel(true);
-                mProgressPanel.setVisibility(View.GONE);
-                mReturnMeeting.setVisibility(View.VISIBLE);
-            } else {
-                MeetingWindowHelper.getInstance().hiddenMeetingWindow(true);
-                showProgressPanel(false);
-            }
-        }
-    }
-
 
     @Override
     public void onMeetingStatusChanged(MeetingStatus meetingStatus, int errorCode, int internalErrorCode) {
-        Log.d(TAG,"onMeetingStatusChanged "+meetingStatus+":"+errorCode);
+        Log.d(TAG,"onMeetingStatusChanged "+meetingStatus);
         if(!ZoomSDK.getInstance().isInitialized())
         {
             showProgressPanel(false);
@@ -312,7 +337,6 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
                 showMeetingUi();
             }
         }
-        refreshUI();
     }
 
     private void showMeetingUi() {
@@ -322,19 +346,13 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
             Intent intent = null;
             if (!enable) {
                 intent = new Intent(this, MyMeetingActivity.class);
-                intent.putExtra("from",MyMeetingActivity.JOIN_FROM_UNLOGIN);
+                intent.putExtra("from",3);
             } else {
                 intent = new Intent(this, RawDataMeetingActivity.class);
             }
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             this.startActivity(intent);
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        MeetingWindowHelper.getInstance().onActivityResult(requestCode, this);
     }
 
     @Override
@@ -346,6 +364,7 @@ public class InitAuthSDKActivity extends Activity implements InitAuthSDKCallback
         {
             ZoomSDK.getInstance().getMeetingService().removeListener(this);
         }
+        ZoomSDK.getInstance().getZoomUIService().setZoomUIDelegate(null);
         InitAuthSDKHelper.getInstance().reset();
     }
 }

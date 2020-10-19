@@ -38,9 +38,10 @@ public class InitAuthSDKHelper implements AuthConstants, ZoomSDKInitializeListen
             mInitAuthSDKCallback = callback;
 
             ZoomSDKInitParams initParams = new ZoomSDKInitParams();
-            initParams.jwtToken = SDK_JWTTOKEN;
+          //dj:  initParams.jwtToken = SDK_JWTTOKEN;
+            initParams.appKey = "9YTKLV7cFvCEhhsBcYQC6MGCFuRkbLwyKWkQ";
+            initParams.appSecret = "RuWlg5Fvfv30DHS8GW9hVOHOTXTCbF4DsS7U";
             initParams.enableLog = true;
-            initParams.enableGenerateDump =true;
             initParams.logSize = 50;
             initParams.domain=AuthConstants.WEB_DOMAIN;
             initParams.videoRawDataMemoryMode = ZoomSDKRawDataMemoryMode.ZoomSDKRawDataMemoryModeStack;

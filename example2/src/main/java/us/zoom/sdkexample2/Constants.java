@@ -5,14 +5,20 @@ public interface Constants {
 	// TODO Change it to your web domain
     String WEB_DOMAIN = "zoom.us";
 
+	// TODO Change it to your APP Key
+    String SDK_KEY = "9YTKLV7cFvCEhhsBcYQC6MGCFuRkbLwyKWkQ";
+	
+	// TODO Change it to your APP Secret
+    String SDK_SECRET = "RuWlg5Fvfv30DHS8GW9hVOHOTXTCbF4DsS7U";
+
 	// TODO change it to your user ID
-    String USER_ID = "Your user ID from REST API";
+    String USER_ID = "harel.dhananjay@gmail.com";
 	
 	// TODO change it to your token
-    String ZOOM_ACCESS_TOKEN = "Your zak from REST API";
+    String ZOOM_TOKEN = "Your token from REST API";
 	
 	// TODO Change it to your exist meeting ID to start meeting
-    String MEETING_ID = null;
+    String MEETING_ID = "liveclass1";
 
     /**
      * We recommend that, you can generate jwttoken on your own server instead of hardcore in the code.
@@ -27,6 +33,6 @@ public interface Constants {
      *     "tokenExp": long // token expire time
      * }
      */
-    public final static String SDK_JWTTOKEN = YOUR JWTTOKEN;
+    public final static String SDK_JWTTOKEN = "YOUR JWTTOKEN";
 
 }

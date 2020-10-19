@@ -604,9 +604,4 @@ public class RawDataMeetingActivity extends FragmentActivity implements InMeetin
     public void onSinkAllowAttendeeChatNotification(int i) {
 
     }
-
-    @Override
-    public void onUserNameChanged(long userId, String name) {
-
-    }
 }

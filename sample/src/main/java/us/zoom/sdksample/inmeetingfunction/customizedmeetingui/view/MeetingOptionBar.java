@@ -374,12 +374,10 @@ public class MeetingOptionBar extends FrameLayout implements View.OnClickListene
         return false;
     }
 
-    private boolean isMySelfMeetingHostBoModerator() {
+    private boolean isMySelfMeetingHost() {
         InMeetingUserInfo myUserInfo = mInMeetingService.getMyUserInfo();
         if (myUserInfo != null && !mInMeetingService.isWebinarMeeting()) {
-            InMeetingUserInfo.InMeetingUserRole role = myUserInfo.getInMeetingUserRole();
-            return role == InMeetingUserInfo.InMeetingUserRole.USERROLE_HOST ||
-                    role == InMeetingUserInfo.InMeetingUserRole.USERROLE_BREAKOUTROOM_MODERATOR;
+            return myUserInfo.getInMeetingUserRole() == InMeetingUserInfo.InMeetingUserRole.USERROLE_HOST;
         }
         return false;
     }
@@ -445,7 +443,7 @@ public class MeetingOptionBar extends FrameLayout implements View.OnClickListene
             }
         }
 
-        if (isMySelfMeetingHostBoModerator()) {
+        if (isMySelfMeetingHost()) {
             InMeetingBOController boController = mInMeetingService.getInMeetingBOController();
             if (boController.isBOEnabled()) {
                 menuAdapter.addItem((new SimpleMenuItem(MENU_CREATE_BO, "Breakout Rooms")));
